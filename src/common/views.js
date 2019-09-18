@@ -2,14 +2,16 @@
  * @Description: file description
  * @Author: wangxg@yonyou.com
  * @Date: 2019-09-17 16:57:18
- * @LastEditTime: 2019-09-18 11:49:33
+ * @LastEditTime: 2019-09-18 16:48:11
  * @LastEditors: wangxg@yonyou.com
  */
 import * as immutable from 'immutable'
-
-const _data = {
+import Defines from './Defines';
+import TableNames from './TableNames';
+let { UiTypeDef, UiObjects } = Defines;
+let _data = {
    Bill: {
-      "type": "container",
+      "type": "bill",
       "text": "单据信息",
       "description": "单据信息",
       "item": [
@@ -19,7 +21,7 @@ const _data = {
       ]
    },
    BillEntityList: {
-      "type": "container",
+      "type": "bill",
       "text": "实体清单",
       "description": "实体清单",
       "item": [
@@ -27,7 +29,7 @@ const _data = {
       ]
    },
    BillCommandList: {
-      "type": "container",
+      "type": "bill",
       "text": "动作清单",
       "description": "动作清单",
       "item": [
@@ -37,9 +39,9 @@ const _data = {
 
    /*---------------通过代码补充item---------------*/
    BillTemplate: {
-      "type": "container",
-      "text": "动作清单",
-      "description": "动作清单",
+      "type": "bill",
+      "text": "模板页面",
+      "description": "模板页面",
       "item":  []
    },
    Toolbar: {
@@ -51,18 +53,25 @@ const _data = {
    /*---------------------------------------------*/
 
    BillEntity: {
-      "type": "container",
+      "type": "bill",
       "text": "实体",
       "description": "实体",
       "item":  []
    },
    BillCommand: {
-      "type": "container",
+      "type": "bill",
       "text": "动作",
       "description": "动作",
       "item":  []
    },
 
+   ConvenientQuery: {
+      "type": "container",
+      "text": "查询列",
+      "description": "",
+      "item": [
+      ]
+   },
    
    ListHeader: {
       "type": "container",
@@ -218,7 +227,16 @@ const _data = {
       ]
    }
 };
+for(let key in UiObjects){
+   let uiObj = UiObjects[key];
+   if(uiObj.uidefault && uiObj.uidefault.uiTable == TableNames.BillTplGroupBase){
+      _data[UiTypeDef.BillTemplate].item.push(uiObj.uitype)
+   }
 
+   if(uiObj.uidefault&&uiObj.uidefault.uiTable == TableNames.BillToolbarItem){
+      _data[UiTypeDef.Toolbar].item.push(uiObj.uitype)
+   }
+}
 
 
 
