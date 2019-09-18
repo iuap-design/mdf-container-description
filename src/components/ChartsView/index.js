@@ -6,7 +6,7 @@ import './index.less'
 import { any } from 'prop-types';
 
 export default class ChartsView extends React.Component {
-    constructor(props: any){
+    constructor(props){
         super(props);
 
     }
@@ -14,14 +14,14 @@ export default class ChartsView extends React.Component {
 
         let _viewTree = {
             name: 'view',
-            children: new Array()
+            children:  []
         };
-        data.map((item: any, key: string) => {
+        data.map((item , key) => {
             let container  = item.toJS();
             container.name  = container.text;
             container.type  = key;
             
-            container.children = container.item.map((_item: any) => {
+            container.children = container.item.map((_item ) => {
                 let _contanler = data.get(key);
                 return {
                     name: _item,

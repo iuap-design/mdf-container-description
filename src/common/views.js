@@ -2,7 +2,7 @@
  * @Description: file description
  * @Author: wangxg@yonyou.com
  * @Date: 2019-09-17 16:57:18
- * @LastEditTime: 2019-09-18 11:39:12
+ * @LastEditTime: 2019-09-18 11:49:33
  * @LastEditors: wangxg@yonyou.com
  */
 import * as immutable from 'immutable'
@@ -40,13 +40,13 @@ const _data = {
       "type": "container",
       "text": "动作清单",
       "description": "动作清单",
-      "item": new Array()
+      "item":  []
    },
    Toolbar: {
       "type": "container",
       "text": "工具栏",
       "description": "工具栏",
-      "item": new Array()
+      "item":  []
    },
    /*---------------------------------------------*/
 
@@ -54,13 +54,13 @@ const _data = {
       "type": "container",
       "text": "实体",
       "description": "实体",
-      "item": new Array()
+      "item":  []
    },
    BillCommand: {
       "type": "container",
       "text": "动作",
       "description": "动作",
-      "item": new Array()
+      "item":  []
    },
 
    
@@ -175,19 +175,19 @@ const _data = {
       "type": "container",
       "text": "Title",
       "description": "内部是简单栅格的容器，什么都放不了。",
-      "item": new Array()
+      "item":  []
    },
    Footer: {
       "type": "container",
       "text": "底部栏",
       "description": "只能放 Input 和 Select 组件，其他的都放不了。",
-      "item": new Array()
+      "item":  []
    },
    SearchTree: {
       "type": "container",
       "text": "搜索树",
       "description": "什么都放不了",
-      "item": new Array()
+      "item":  []
    },
    LineTabs: {
       "type": "container",
