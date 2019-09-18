@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as echarts from 'echarts';
-import data from 'common/views.ts';
+import data from 'common/views';
 import './index.less'
 import { any } from 'prop-types';
 
