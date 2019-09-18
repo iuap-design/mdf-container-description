@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env BABEL_ENV=development NODE_ENV=development webpack-dev-server --progress --colors  --config webpack.config.js",
-    "build": "cross-env webpack --config webpack.dll.config.js"
+    "build": "cross-env webpack --progress --colors --config webpack.dll.config.js"
   },
   "author": "",
   "license": "ISC",

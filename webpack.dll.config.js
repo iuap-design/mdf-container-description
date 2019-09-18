@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 /**
  * Plugin that simplifies creation of HTML files to serve your bundles
  * npm i --save-dev html-webpack-plugin
@@ -12,7 +13,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  * npm i clean-webpack-plugin --save-dev
  * @type {CleanWebpackPlugin}
  */
-const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
+const {CleanWebpackPlugin}  = require('clean-webpack-plugin');
 
 
 /**
@@ -44,8 +45,8 @@ module.exports =  {
     output: {
       path: path.join(__dirname, 'dist'),
       
-      filename: "[name].[hash].js",
-      chunkFilename: "[name].[hash].js"
+    //   filename: "[name].[hash].js",
+      chunkFilename: "[name].js?[hash]"
     },
     mode: 'production',
     // devServer: {
@@ -94,15 +95,15 @@ module.exports =  {
                 test: /\.(le|c)ss$/,
                 // include: [...origin, 'node_modules'],
                 exclude: /(node_modules)/,
-                loaders: ['style-loader', 'css-loader', 'less-loader']
+                loaders: [ MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
             }
         ]
     },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM",
-        "echarts": 'echarts'
-    },
+    // externals: {
+    //     "react": "React",
+    //     "react-dom": "ReactDOM",
+    //     "echarts": 'echarts'
+    // },
     optimization: {
         splitChunks: {
             cacheGroups: {
@@ -123,24 +124,15 @@ module.exports =  {
                 }
               }
         },
-
+        // minimize: true,
         minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                /**
-                 *  sourceMap 和 devtool: 'inline-source-map', 冲突
-                 */
-                sourceMap: false, // set to true if you want JS source maps,
-                /**
-                 *  extractComments 导出备注
-                 */
-                extractComments: 'all'
-            }),
-            // new OptimizeCSSAssetsPlugin({})
+            new UglifyJsPlugin(),
+            new OptimizeCSSAssetsPlugin({})
         ]
     },
     plugins: [
+        // new webpack.BannerPlugin('hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'),
+        new webpack.BannerPlugin(`[filebase]\n${new Date()}\n`),
         new HtmlWebpackPlugin({//预览时使用path.join(__dirname, './example/index.js')
             template: path.resolve(__dirname, 'src', 'index.html'),//模板
             // filename: 'index.html',
@@ -169,12 +161,12 @@ module.exports =  {
          * 由 webpack 生成的文件或目录才能被 CleanWebpackPlugin 删除
          * 下面配置的是 打包前 需要被删除的目录
          */
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: ['dist']
-        }),
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
+            // filename: '[name].css',
+            filename: "./css/[name].css?[hash]" ,
+            // chunkFilename: '[id].css',
+            // ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
         // new webpack.optimize.DedupePlugin(),
 
